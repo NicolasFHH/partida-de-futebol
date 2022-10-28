@@ -1,4 +1,4 @@
-package com.example.demo.entities.enums;
+package com.nicolas.entities.enums;
 
 public enum Posicao {
 	

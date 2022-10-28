@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.nicolas.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.example.demo.entities.enums.Posicao;
+import com.nicolas.entities.enums.Posicao;
 
 @Entity
 public class Jogador {
@@ -17,7 +17,7 @@ public class Jogador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(nullable = false)
-	private String name;
+	private String nome;
 	@Column(nullable = false)
 	private int idade;
 	@Enumerated(EnumType.STRING)
@@ -29,7 +29,7 @@ public class Jogador {
 	}
 
 	public Jogador(String name, int idade, Posicao posicao) {
-		this.name = name;
+		this.nome = name;
 		this.idade = idade;
 		this.posicao = posicao;
 	}
@@ -39,7 +39,7 @@ public class Jogador {
 	}
 
 	public String getName() {
-		return name;
+		return nome;
 	}
 
 	public int getIdade() {
