@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class JogadorController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void novoJogador(@RequestBody JogadorRequest jogadorRequest) {
+	public void novoJogador(@RequestBody @Valid JogadorRequest jogadorRequest) {
 		Jogador jogador = jogadorRequest.converter();
 		jogadorRepository.save(jogador);
 	}
