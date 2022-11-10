@@ -13,7 +13,7 @@ public class JogadorResponse {
 	
 	public JogadorResponse(Jogador jogador) {
 		this.id = jogador.getId();
-		this.nome = jogador.getName();
+		this.nome = jogador.getNome();
 		this.idade = jogador.getIdade();
 		this.posicao = jogador.getPosicao();
 		this.golsFeitos = jogador.getGolsFeitos();

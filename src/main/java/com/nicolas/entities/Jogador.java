@@ -28,8 +28,8 @@ public class Jogador {
 	public Jogador() {
 	}
 
-	public Jogador(String name, int idade, Posicao posicao) {
-		this.nome = name;
+	public Jogador(String nome, int idade, Posicao posicao) {
+		this.nome = nome;
 		this.idade = idade;
 		this.posicao = posicao;
 	}
@@ -38,7 +38,7 @@ public class Jogador {
 		return id;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 

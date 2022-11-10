@@ -10,7 +10,7 @@ import com.nicolas.entities.enums.Posicao;
 
 public class JogadorRequest {
 	
-	@NotBlank
+	@NotBlank //não nulo e não vazio
 	private String nome;
 	@Min(15)
 	@Max(56)
@@ -21,7 +21,7 @@ public class JogadorRequest {
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public int getIdade() {
 		return idade;
 	}
