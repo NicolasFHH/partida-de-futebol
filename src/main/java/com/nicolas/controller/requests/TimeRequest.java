@@ -1,6 +1,7 @@
 package com.nicolas.controller.requests;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class TimeRequest {
 	private String cidadeDoTime;
 	@NotNull
 	private String estadoDoTime;
-	private List<Integer> jogadores;
+	private List<Integer> jogadores = new ArrayList<>();
 	
 	public String getNome() {
 		return nome;
@@ -41,8 +42,12 @@ public class TimeRequest {
 		return estadoDoTime;
 	}
 	
+	public List<Integer> getJogadores() {
+		return jogadores;
+	}
+	
 	public Time converter(JogadorRepository jogadorRepository) {
 		List<Jogador> listaJogadores = jogadores.stream().map(jogador -> jogadorRepository.findById(jogador).get()).collect(Collectors.toList());
-	    return new Time(nome, dataDeFundacao, cidadeDoTime, estadoDoTime, listaJogadores);
+		return new Time(nome, dataDeFundacao, cidadeDoTime, estadoDoTime, listaJogadores);
 	}
 }

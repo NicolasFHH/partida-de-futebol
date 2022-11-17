@@ -30,6 +30,9 @@ public class Time {
 	private int empates = 0;
 	private int derrotas = 0;
 	
+	public Time() {
+	}
+	
 	public Time(String name, LocalDate dataDeFundacao, String cidadeDoTime, String estadoDoTime, List<Jogador> listaJogadores) {
 		this.nome = name;
 		this.dataDeFundacao = dataDeFundacao;
@@ -38,7 +41,7 @@ public class Time {
 		this.jogadoresDoElenco = listaJogadores;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -72,5 +75,9 @@ public class Time {
 
 	public int getDerrotas() {
 		return derrotas;
+	}
+	
+	public void adicionaJogadores(List<Jogador> jogadores) {
+		jogadoresDoElenco.addAll(jogadores);
 	}
 }
