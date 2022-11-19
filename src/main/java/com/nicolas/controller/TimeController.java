@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nicolas.commons.exceptions.FutebolApiException;
 import com.nicolas.controller.requests.AdicionaJogadorRequest;
 import com.nicolas.controller.requests.TimeRequest;
 import com.nicolas.controller.responses.TimeResponse;
@@ -41,24 +40,8 @@ public class TimeController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void novoTime(@RequestBody @Valid TimeRequest timeRequest) {
 		
-		realizaVerificacoes(timeRequest);
-		
 		Time time = timeRequest.converter(jogadorRepository);
 		timeRepository.save(time);
-	}
-	
-	private void realizaVerificacoes(@Valid TimeRequest timeRequest) {
-		Optional<Time> verificaTime = timeRepository.findByNome(timeRequest.getNome());
-		if (verificaTime.isPresent()) {
-			throw new FutebolApiException("Esse time já está cadastrado!", "nome", HttpStatus.BAD_REQUEST);
-		}
-		
-		for (int i = 0; i < timeRequest.getJogadores().size(); i++) {
-			Optional<Jogador> verificaJogador = jogadorRepository.findById(timeRequest.getJogadores().get(i));
-			if (!verificaJogador.isPresent()) {
-				throw new FutebolApiException("Não existe ID para esse jogador", "ID_jogador", HttpStatus.UNPROCESSABLE_ENTITY);
-			}
-		}
 	}
 
 	@GetMapping
@@ -90,27 +73,11 @@ public class TimeController {
 	@PatchMapping
 	public ResponseEntity<TimeResponse> adicionaJogador(@RequestBody @Valid AdicionaJogadorRequest request) {
 		
-		verificaNovoJogador(request);
-		
 		Time time = timeRepository.findById(request.getIdTime()).get();
 		List<Jogador> jogadores = request.getIdJogador().stream().map(jogador -> jogadorRepository.findById(jogador).get()).collect(Collectors.toList());
 		time.adicionaJogadores(jogadores);
 		timeRepository.save(time);
 		
 		return ResponseEntity.ok().body(new TimeResponse(time));
-	}
-
-	private void verificaNovoJogador(@Valid AdicionaJogadorRequest request) {
-		Optional<Time> verificaTime = timeRepository.findById(request.getIdTime());
-		if (!verificaTime.isPresent()) {
-			throw new FutebolApiException("Esse time não existe", "nome", HttpStatus.BAD_REQUEST);
-		}
-		
-		for (int i = 0; i < request.getIdJogador().size(); i++) {
-			Optional<Jogador> verificaJogador = jogadorRepository.findById(request.getIdJogador().get(i));
-			if (!verificaJogador.isPresent()) {
-				throw new FutebolApiException("Não existe ID para esse jogador", "ID_jogador", HttpStatus.UNPROCESSABLE_ENTITY);
-			}
-		}
 	}
 }

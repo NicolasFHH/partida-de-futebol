@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.nicolas.commons.validators.PosicaoCheck;
 import com.nicolas.entities.Jogador;
 import com.nicolas.entities.enums.Posicao;
 
@@ -16,6 +17,7 @@ public class JogadorRequest {
 	@Max(56)
 	private int idade;
 	@NotNull
+	@PosicaoCheck(enumClass = Posicao.class)
 	private Posicao posicao;
 	
 	public String getNome() {

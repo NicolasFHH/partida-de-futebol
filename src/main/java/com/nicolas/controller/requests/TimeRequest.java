@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import com.nicolas.commons.validators.FieldFinder;
+import com.nicolas.commons.validators.UniqueValue;
 import com.nicolas.entities.Jogador;
 import com.nicolas.entities.Time;
 import com.nicolas.repositories.JogadorRepository;
@@ -16,15 +18,16 @@ import com.nicolas.repositories.JogadorRepository;
 public class TimeRequest {
 	
 	@NotBlank
+	@UniqueValue(domainClass = Time.class, fieldName = "nome")
 	private String nome;
 	@NotNull
 	@Past
 	private LocalDate dataDeFundacao;
-	@NotNull
+	@NotBlank
 	private String cidadeDoTime;
-	@NotNull
+	@NotBlank
 	private String estadoDoTime;
-	private List<Integer> jogadores = new ArrayList<>();
+	private List<@FieldFinder(domainClass = Jogador.class, fieldName = "id") Integer> jogadores = new ArrayList<>();
 	
 	public String getNome() {
 		return nome;
