@@ -18,7 +18,7 @@ public class JogadorRequest {
 	private int idade;
 	@NotNull
 	@PosicaoCheck(enumClass = Posicao.class)
-	private Posicao posicao;
+	private String posicao;
 	
 	public String getNome() {
 		return nome;
@@ -28,11 +28,11 @@ public class JogadorRequest {
 		return idade;
 	}
 
-	public Posicao getPosicao() {
+	public String getPosicao() {
 		return posicao;
 	}
 	
 	public Jogador converter() {
-	    return new Jogador(nome, idade, posicao);
+	    return new Jogador(nome, idade, Posicao.valueOf(posicao));
 	}
 }

@@ -63,7 +63,7 @@ class JogadorControllerTest {
 	}
 	
 	@Test
-	void naoDeveCriarJogadorQuandoEstaTudoCerto() throws Exception {
+	void deveCriarJogadorQuandoEstaTudoCerto() throws Exception {
 		String jogadorDTO = "{\"nome\": \"Roberto\", \"idade\": 21, \"posicao\": \"ATACANTE\"}";
 		
 		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(jogadorDTO).contentType(MediaType.APPLICATION_JSON))
