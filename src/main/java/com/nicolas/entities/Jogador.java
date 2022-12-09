@@ -53,4 +53,8 @@ public class Jogador {
 	public int getGolsFeitos() {
 		return golsFeitos;
 	}
+	
+	public void adicionaGol() {
+		golsFeitos ++;
+	}
 }

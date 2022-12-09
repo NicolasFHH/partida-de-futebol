@@ -80,4 +80,16 @@ public class Time {
 	public void adicionaJogadores(List<Jogador> jogadores) {
 		jogadoresDoElenco.addAll(jogadores);
 	}
+	
+	public void adicionaVitoria() {
+		vitorias ++;
+	}
+	
+	public void adicionaEmpate() {
+		empates ++;
+	}
+	
+	public void adicionaDerrota() {
+		derrotas ++;
+	}
 }
