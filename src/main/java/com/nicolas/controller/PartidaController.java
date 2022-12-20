@@ -2,6 +2,7 @@ package com.nicolas.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -9,6 +10,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nicolas.commons.exceptions.FutebolApiException;
 import com.nicolas.controller.requests.PartidaRequest;
+import com.nicolas.controller.responses.PartidaResponse;
 import com.nicolas.entities.Jogador;
 import com.nicolas.entities.Partida;
 import com.nicolas.entities.Time;
@@ -112,5 +117,22 @@ public class PartidaController {
 		
 		timeRepository.save(timeMandante);
 		timeRepository.save(timeVisitante);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<PartidaResponse>> findAll() {
+		List<Partida> partidas = partidaRepository.findAll();
+		List<PartidaResponse> partidasResponse = partidas.stream().map(PartidaResponse::new).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(partidasResponse);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<PartidaResponse> getPartidaPorId(@PathVariable int id) {
+		Optional<Partida> partida = partidaRepository.findById(id);
+		if (partida.isPresent()) {
+			return ResponseEntity.ok().body(new PartidaResponse(partida.get()));
+		}
+		return ResponseEntity.notFound().build();
 	}
 }
