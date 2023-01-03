@@ -88,7 +88,7 @@ public class TimeControllerTest {
 	}
 	
 	@Test
-	void DeveCriarTimeQuandoEstaTudoCerto() throws Exception {
+	void deveCriarTimeQuandoEstaTudoCerto() throws Exception {
 		String timeDTO = "{\"nome\": \"Leicester City\", \"dataDeFundacao\": \"1884-01-01\", \"cidadeDoTime\": \"Leicester\", \"estadoDoTime\": \"East Midlands\"}";
 		
 		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(timeDTO).contentType(MediaType.APPLICATION_JSON))

@@ -45,9 +45,8 @@ public class PartidaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void novaPartida(@RequestBody @Valid PartidaRequest partidaRequest) {
-		
+	
 		validaPartidaRequest(partidaRequest);
-		
 		Partida partida = partidaRequest.converter(timeRepository);
 		partidaRepository.save(partida);
 		
