@@ -35,7 +35,10 @@ public class Partida {
 	private Integer cartoesAmerelosDoTimeVisitante = 0;	
 	private Integer cartoesVermelhosDoTimeMandante = 0;	
 	private Integer cartoesVermelhosDoTimeVisitante = 0;
-
+	
+	public Partida() {
+	}
+	
 	public Partida(Time timeMandante, Time timeVisitante, LocalDateTime dataDeInicio, LocalDateTime dataDoFim,
 			Integer golsDoTimeMandante, Integer golsDoTimeVisitante, Integer cartoesAmarelosDoTimeMandante,
 			Integer cartoesAmerelosDoTimeVisitante, Integer cartoesVermelhosDoTimeMandante,

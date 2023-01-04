@@ -1,6 +1,7 @@
 package com.nicolas.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class Time {
 	@Column(nullable = false)
 	private String estadoDoTime;
 	@OneToMany
-	private List<Jogador> jogadoresDoElenco;
+	private List<Jogador> jogadoresDoElenco = new ArrayList<>();;
 	private int vitorias = 0;
 	private int empates = 0;
 	private int derrotas = 0;
