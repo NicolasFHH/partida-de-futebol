@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class PartidaController {
 	@Autowired
 	private JogadorRepository jogadorRepository;
 	
+	@Transactional
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void novaPartida(@RequestBody @Valid PartidaRequest partidaRequest) {
@@ -92,8 +94,6 @@ public class PartidaController {
 		for (Jogador jogador : jogadoresGols) {
 			jogador.adicionaGol();
 		}
-		
-		jogadorRepository.saveAll(jogadoresGols);
 	}
 	
 	private void atualizaEstatisticasDeTimes(@Valid PartidaRequest partidaRequest) {
@@ -113,9 +113,6 @@ public class PartidaController {
 			timeMandante.adicionaEmpate();
 			timeVisitante.adicionaEmpate();
 		}
-		
-		timeRepository.save(timeMandante);
-		timeRepository.save(timeVisitante);
 	}
 	
 	@GetMapping
